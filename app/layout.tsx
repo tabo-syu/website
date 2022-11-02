@@ -1,9 +1,9 @@
+import GlobalFooter from '@/components/GlobalFooter';
+import GlobalHeader from '@/components/GlobalHeader';
+import Main from '@/components/Main';
+import '@/styles/globals.css';
 import { Noto_Sans_JP } from '@next/font/google';
 import React from 'react';
-import GlobalFooter from '../components/GlobalFooter';
-import GlobalHeader from '../components/GlobalHeader';
-import Main from '../components/Main';
-import '../styles/globals.css';
 
 const noto = Noto_Sans_JP({
   weight: ['400', '700'],
