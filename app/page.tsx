@@ -1,5 +1,5 @@
 const Page: React.FC = () => {
-  return <div>Page</div>;
+  return <div className='h-[2000px]'>Page</div>;
 };
 
 export default Page;
