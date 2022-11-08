@@ -1,7 +1,6 @@
 import GlobalFooter from '@/components/GlobalFooter';
 import GlobalHeader from '@/components/GlobalHeader';
 import Main from '@/components/Main';
-import '@/styles/globals.css';
 import { Noto_Sans_JP } from '@next/font/google';
 import React from 'react';
 
@@ -15,7 +14,7 @@ type Props = {
 };
 const Layout: React.FC<Props> = (props) => {
   return (
-    <html lang='ja' className={noto.className}>
+    <div className={noto.className}>
       <div className='sticky top-0'>
         <GlobalHeader />
       </div>
@@ -25,7 +24,7 @@ const Layout: React.FC<Props> = (props) => {
       <div>
         <GlobalFooter />
       </div>
-    </html>
+    </div>
   );
 };
 
