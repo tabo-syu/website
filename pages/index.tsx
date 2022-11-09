@@ -1,4 +1,4 @@
-import Layout from '@/layouts/layout';
+import Layout from '@/layouts/Layout';
 import type { NextPageWithLayout } from '@/pages/_app';
 import type { ReactElement } from 'react';
 
