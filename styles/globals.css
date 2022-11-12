@@ -34,3 +34,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.remark-highlight {
+  @apply mb-8;
+}
