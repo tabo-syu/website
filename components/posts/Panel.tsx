@@ -1,7 +1,7 @@
-import PublishedAt from '@/components/blog/PublishedAt';
-import Tag from '@/components/blog/Tag';
-import Tags from '@/components/blog/Tags';
-import Thumbnail from '@/components/blog/Thumbnail';
+import PublishedAt from '@/components/posts/PublishedAt';
+import Tag from '@/components/posts/Tag';
+import Tags from '@/components/posts/Tags';
+import Thumbnail from '@/components/posts/Thumbnail';
 import { Meta } from '@/lib/mdx';
 import Link from 'next/link';
 

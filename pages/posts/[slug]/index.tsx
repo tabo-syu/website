@@ -19,11 +19,11 @@ import {
   THead,
   Tr,
   Ul,
-} from '@/components/blog/slug/Article';
-import Tag from '@/components/blog/Tag';
-import Tags from '@/components/blog/Tags';
-import Article from '@/layouts/blog/slug/Layout';
+} from '@/components/posts/slug/Article';
+import Tag from '@/components/posts/Tag';
+import Tags from '@/components/posts/Tags';
 import Layout from '@/layouts/Layout';
+import Article from '@/layouts/posts/slug/Layout';
 import { compile, CompileResult } from '@/lib/mdx';
 import { basePostsDir, getSlugs, loadPost } from '@/lib/posts';
 import type { NextPageWithLayout } from '@/pages/_app';
