@@ -17,7 +17,7 @@ const GlobalHeader: React.FC = () => {
         </h1>
         <nav className='text-lg'>
           <Link
-            href='/blog'
+            href='/posts'
             className='hover:text-gray-500 dark:hover:text-gray-400'
           >
             Blog

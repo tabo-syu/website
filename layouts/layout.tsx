@@ -1,6 +1,5 @@
-import GlobalFooter from '@/components/GlobalFooter';
-import GlobalHeader from '@/components/GlobalHeader';
-import Main from '@/components/Main';
+import GlobalFooter from '@/components/common/GlobalFooter';
+import GlobalHeader from '@/components/common/GlobalHeader';
 import { Noto_Sans_JP } from '@next/font/google';
 import React from 'react';
 
@@ -18,8 +17,8 @@ const Layout: React.FC<Props> = (props) => {
       <div className='sticky top-0'>
         <GlobalHeader />
       </div>
-      <div className='mx-auto max-w-4xl'>
-        <Main>{props.children}</Main>
+      <div>
+        <main>{props.children}</main>
       </div>
       <div>
         <GlobalFooter />

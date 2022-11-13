@@ -20,15 +20,7 @@ type Props = {
 const assignId = (children: React.ReactNode) =>
   typeof children === 'string' ? children : undefined;
 
-const H1 = (props: HeadingProps) => {
-  return (
-    <h1
-      id={assignId(props.children)}
-      className='mb-20 text-4xl font-bold'
-      {...props}
-    />
-  );
-};
+const H1 = () => <></>;
 
 const H2 = (props: HeadingProps) => {
   return (
@@ -128,7 +120,9 @@ const THead = (props: Props) => {
 };
 
 const Tr = (props: Props) => {
-  return <tr className='border-b' {...props} />;
+  return (
+    <tr className='border-b border-gray-300 dark:border-gray-200' {...props} />
+  );
 };
 
 const Th = (props: Props) => {
@@ -142,7 +136,7 @@ const Td = (props: Props) => {
 const Blockquote = (props: Props) => {
   return (
     <blockquote
-      className='border-l-4 pl-5 italic text-gray-400 dark:border-gray-400 dark:text-gray-400'
+      className='border-l-4 border-gray-400 pl-5 italic text-gray-500 dark:text-gray-400'
       {...props}
     />
   );

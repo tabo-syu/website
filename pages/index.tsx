@@ -6,7 +6,7 @@ const Page: NextPageWithLayout = () => {
   return <div>Page</div>;
 };
 
-Page.getLayout = function getLayout(page: ReactElement) {
+Page.getLayout = (page: ReactElement) => {
   return <Layout>{page}</Layout>;
 };
 
