@@ -1,10 +1,5 @@
-import { Zen_Dots } from '@next/font/google';
+import { zen } from '@/lib/font';
 import Link from 'next/link';
-
-const zen = Zen_Dots({
-  weight: '400',
-  subsets: ['latin'],
-});
 
 const GlobalHeader: React.FC = () => {
   return (

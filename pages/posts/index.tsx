@@ -1,7 +1,7 @@
+import Panel from '@/components/common/Panel';
+import Panels from '@/components/common/Panels';
 import Heading from '@/components/posts/Heading';
-import Panel from '@/components/posts/Panel';
-import Panels from '@/components/posts/Panels';
-import Layout from '@/layouts/Layout';
+import Layout from '@/layouts/common/WithHeaderLayout';
 import ArticleList from '@/layouts/posts/Layout';
 import { compile, Meta } from '@/lib/mdx';
 import { basePostsDir, loadPosts } from '@/lib/posts';
@@ -38,9 +38,9 @@ Page.getLayout = (page: ReactElement) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = (await loadPosts(basePostsDir)).map(async (post) => {
-    const slug = post.slug;
     const source = await compile(post.content);
-    return { slug, meta: source.frontmatter };
+
+    return { slug: post.slug, meta: source.frontmatter };
   });
 
   return {

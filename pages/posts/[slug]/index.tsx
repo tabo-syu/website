@@ -22,7 +22,7 @@ import {
 } from '@/components/posts/slug/Article';
 import Tag from '@/components/posts/Tag';
 import Tags from '@/components/posts/Tags';
-import Layout from '@/layouts/Layout';
+import Layout from '@/layouts/common/WithHeaderLayout';
 import Article from '@/layouts/posts/slug/Layout';
 import { compile, CompileResult } from '@/lib/mdx';
 import { basePostsDir, getSlugs, loadPost } from '@/lib/posts';

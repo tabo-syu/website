@@ -25,6 +25,8 @@ const compile = (content: string): Promise<CompileResult> => {
     parseFrontmatter: true,
   };
 
+  const result = serialize(content, options);
+
   return serialize(content, options);
 };
 
