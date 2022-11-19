@@ -16,11 +16,11 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "contentlayer/generated": ["./.contentlayer/generated"],
       "@/components/*": ["components/*"],
-      "@/pages/*": ["pages/*"],
+      "@/app/*": ["app/*"],
       "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"],
-      "@/layouts/*": ["layouts/*"]
+      "@/styles/*": ["styles/*"]
     },
     "plugins": [
       {
@@ -28,6 +28,12 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".contentlayer/generated",
+    ".next/types/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }
