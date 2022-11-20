@@ -1,7 +1,7 @@
 import CardList from '@/components/model/post/CardList';
 import { H2 } from '@/components/ui/Heading';
 import WideContainer from '@/components/ui/WideContainer';
-import { findPostsFromTag, tags } from '@/lib/posts';
+import { allTags, findPostsFromTag } from '@/lib/posts';
 import { notFound } from 'next/navigation';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export function generateStaticParams(): Props['params'][] {
-  return tags.map((tag) => ({ tag }));
+  return allTags.map((tag) => ({ tag }));
 }
 
 export default function Page({ params }: Props) {

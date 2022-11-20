@@ -10,6 +10,9 @@ const nextConfig = {
   env: {
     domain: 'http://localhost:3000',
   },
+  images: {
+    domains: ['i.scdn.co'],
+  },
   webpack: (config) => {
     config.infrastructureLogging = {
       level: 'error',
