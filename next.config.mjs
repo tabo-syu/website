@@ -7,6 +7,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  env: {
+    domain: 'http://localhost:3000',
+  },
   webpack: (config) => {
     config.infrastructureLogging = {
       level: 'error',

@@ -13,6 +13,11 @@ export const Post = defineDocumentType(() => ({
       description: '記事のタイトル',
       required: true,
     },
+    description: {
+      type: 'string',
+      description: '記事の概要',
+      required: true,
+    },
     tags: {
       type: 'list',
       of: { type: 'string' },
