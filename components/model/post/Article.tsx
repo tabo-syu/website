@@ -1,11 +1,9 @@
-import Blockquote from '@/components/ui/Blockquote';
-import Code from '@/components/ui/Code';
 import { H2, H3, H4, H5, H6 } from '@/components/ui/Heading';
 import Hr from '@/components/ui/Hr';
 import Img from '@/components/ui/Img';
 import { Li, Ol, Ul } from '@/components/ui/List';
 import { Table, Td, Th, THead, Tr } from '@/components/ui/Table';
-import { A, P } from '@/components/ui/Text';
+import { A, Blockquote, Code, P } from '@/components/ui/Text';
 import { Post } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import 'prismjs/themes/prism-okaidia.min.css';
