@@ -5,7 +5,7 @@ export default function Head() {
     <PostsHead
       title='記事一覧'
       description='今までに投稿した記事の一覧ページです。'
-      image='/1200x630.png'
+      image='/ogp.jpg'
       type='blog'
     />
   );

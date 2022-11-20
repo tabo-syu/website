@@ -5,7 +5,7 @@ export default function Head() {
     <TopHead
       title=''
       description='たぼすけのブログ。いろいろなことを書く（予定）。'
-      image='/og.png'
+      image='/ogp.jpg'
       type='website'
     />
   );
