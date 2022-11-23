@@ -15,7 +15,7 @@ const Ranking: React.FC<Props> = ({ artists, tracks }) => {
         {artists.map((artist) => (
           <article
             key={artist.url}
-            className='border-b border-gray-700 py-3 last:border-none first-of-type:pt-0'
+            className='border-b py-3 last:border-none first-of-type:pt-0 dark:border-gray-700'
           >
             <ArtistMedia artist={artist} />
           </article>
@@ -26,7 +26,7 @@ const Ranking: React.FC<Props> = ({ artists, tracks }) => {
         {tracks.map((track) => (
           <article
             key={track.url}
-            className='border-b border-gray-700 py-3 last:border-none first-of-type:pt-0'
+            className='border-b py-3 last:border-none first-of-type:pt-0 dark:border-gray-700'
           >
             <TrackMedia track={track} />
           </article>
