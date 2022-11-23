@@ -8,7 +8,7 @@ const nextConfig = {
     appDir: true,
   },
   env: {
-    domain: 'http://localhost:3000',
+    domain: 'https://tabo-syu.com',
   },
   images: {
     domains: ['i.scdn.co'],
