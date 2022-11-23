@@ -3,7 +3,7 @@ import Hr from '@/components/ui/Hr';
 import Img from '@/components/ui/Img';
 import { Li, Ol, Ul } from '@/components/ui/List';
 import { Table, Td, Th, THead, Tr } from '@/components/ui/Table';
-import { A, Blockquote, Code, P } from '@/components/ui/Text';
+import { A, Blockquote, P } from '@/components/ui/Text';
 import { Post } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import 'prismjs/themes/prism-okaidia.min.css';
@@ -31,7 +31,8 @@ const Article: React.FC<Props> = ({ post }) => {
     th: Th,
     td: Td,
     blockquote: Blockquote,
-    code: Code,
+    // TODO: remark プラグインで書き換えた HTML に対して contentlayer が component で上書きしてしまう
+    // code: Code,
     hr: Hr,
     img: Img,
   };
