@@ -6,11 +6,11 @@ const Header: React.FC = () => {
     <header className='border-b border-gray-900/10 py-5 backdrop-blur dark:border-gray-300/10'>
       <div className='mx-auto flex max-w-6xl items-center justify-between px-4'>
         <h1
-          className={`${zen.className} font-icon text-4xl font-bold leading-none`}
+          className={`${zen.className} font-icon text-2xl font-bold leading-none md:text-4xl`}
         >
           <Link href='/'>tabo-syu</Link>
         </h1>
-        <nav className='text-lg'>
+        <nav className='text-base md:text-lg'>
           <Link
             href='/posts'
             className='hover:text-gray-500 dark:hover:text-gray-400'
