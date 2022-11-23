@@ -1,6 +1,5 @@
-import Artists from '@/components/model/artist/Artists';
 import CardList from '@/components/model/post/CardList';
-import Tracks from '@/components/model/track/Tracks';
+import Ranking from '@/components/model/spotify/Ranking';
 import { H2 } from '@/components/ui/Heading';
 import MainVisual from '@/components/ui/MainVisual';
 import WideContainer from '@/components/ui/WideContainer';
@@ -18,12 +17,10 @@ export default async function Page() {
     <>
       <MainVisual />
       <WideContainer>
-        <H2 id='latest'>最新記事</H2>
+        <H2 id='posts'>Recent Posts</H2>
         <CardList posts={posts} />
-        <H2 id='artists'>はまってるアーティスト</H2>
-        <Artists artists={artists} />
-        <H2 id='tracks'>はまってる曲</H2>
-        <Tracks tracks={tracks} />
+        <H2 id='spotify'>My Spotify</H2>
+        <Ranking artists={artists} tracks={tracks} />
       </WideContainer>
     </>
   );

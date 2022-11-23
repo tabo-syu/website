@@ -38,16 +38,21 @@ type Image = {
   width: number;
   height: number;
 };
+type Images = {
+  min: Image;
+  default: Image;
+  max: Image;
+};
 
 type Track = {
   name: string;
   artists: string[];
-  images: Image[];
+  images: Images;
   url: string;
 };
 const fetchTopTracks = async () => {
   const { access_token } = await fetchAccessToken();
-  const endpoint = `${domain}/v1/me/top/tracks`;
+  const endpoint = `${domain}/v1/me/top/tracks?limit=5`;
   const response = await fetch(endpoint, {
     headers: {
       Authorization: `Bearer ${access_token}`,
@@ -59,7 +64,11 @@ const fetchTopTracks = async () => {
   const tracks = items.map((track: any) => ({
     name: track.name,
     artists: track.artists.map((artist: any) => artist.name),
-    images: track.album.images,
+    images: {
+      max: track.album.images[0],
+      default: track.album.images[1],
+      min: track.album.images[2],
+    },
     url: track.external_urls.spotify,
   }));
 
@@ -68,12 +77,13 @@ const fetchTopTracks = async () => {
 
 type Artist = {
   name: string;
-  images: Image[];
+  images: Images;
   url: string;
+  genres: string[];
 };
 const fetchTopArtists = async () => {
   const { access_token } = await fetchAccessToken();
-  const endpoint = `${domain}/v1/me/top/artists`;
+  const endpoint = `${domain}/v1/me/top/artists?limit=5`;
   const response = await fetch(endpoint, {
     headers: {
       Authorization: `Bearer ${access_token}`,
@@ -84,8 +94,13 @@ const fetchTopArtists = async () => {
   const { items } = await response.json();
   const artists = items.map((artist: any) => ({
     name: artist.name,
-    images: artist.images,
+    images: {
+      max: artist.images[0],
+      default: artist.images[1],
+      min: artist.images[2],
+    },
     url: artist.external_urls.spotify,
+    genres: artist.genres,
   }));
 
   return artists as Artist[];
