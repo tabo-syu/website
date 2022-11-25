@@ -9,8 +9,8 @@ type Props = {
 };
 const Ranking: React.FC<Props> = ({ artists, tracks }) => {
   return (
-    <div className='flex flex-wrap gap-10 md:flex-nowrap'>
-      <section className='basis-full'>
+    <div className='grid-rows grid gap-10 md:grid-cols-2'>
+      <section>
         <H3>Top Artists</H3>
         {artists.map((artist) => (
           <article
@@ -21,7 +21,7 @@ const Ranking: React.FC<Props> = ({ artists, tracks }) => {
           </article>
         ))}
       </section>
-      <section className='basis-full'>
+      <section>
         <H3>Top Tracks</H3>
         {tracks.map((track) => (
           <article
