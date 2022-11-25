@@ -1,5 +1,5 @@
 import RecentPosts from '@/components/model/post/PostList';
-import Ranking from '@/components/model/spotify/Ranking';
+import MySpotifyTrends from '@/components/model/spotify/Ranking';
 import { H2 } from '@/components/ui/Heading';
 import MainVisual from '@/components/ui/MainVisual';
 import WideContainer from '@/components/ui/WideContainer';
@@ -20,7 +20,7 @@ export default async function Page() {
         <H2 id='posts'>Recent Posts</H2>
         <RecentPosts posts={posts} />
         <H2 id='spotify'>My Spotify Trends</H2>
-        <Ranking artists={artists} tracks={tracks} />
+        <MySpotifyTrends artists={artists} tracks={tracks} />
       </WideContainer>
     </>
   );

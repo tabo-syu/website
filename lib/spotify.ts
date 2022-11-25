@@ -44,13 +44,13 @@ type Images = {
   max: Image;
 };
 
-type Track = {
+export type Track = {
   name: string;
   artists: string[];
   images: Images;
   url: string;
 };
-const fetchTopTracks = async () => {
+export const fetchTopTracks = async () => {
   const { access_token } = await fetchAccessToken();
   const endpoint = `${domain}/v1/me/top/tracks?limit=5`;
   const response = await fetch(endpoint, {
@@ -75,13 +75,13 @@ const fetchTopTracks = async () => {
   return tracks as Track[];
 };
 
-type Artist = {
+export type Artist = {
   name: string;
   images: Images;
   url: string;
   genres: string[];
 };
-const fetchTopArtists = async () => {
+export const fetchTopArtists = async () => {
   const { access_token } = await fetchAccessToken();
   const endpoint = `${domain}/v1/me/top/artists?limit=5`;
   const response = await fetch(endpoint, {
@@ -105,5 +105,3 @@ const fetchTopArtists = async () => {
 
   return artists as Artist[];
 };
-
-export { fetchTopTracks, fetchTopArtists, type Track, type Artist };
