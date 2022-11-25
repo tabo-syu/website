@@ -6,7 +6,7 @@ import TagList from './TagList';
 type Props = {
   post: Post;
 };
-const Card: React.FC<Props> = ({ post }) => {
+const Post: React.FC<Props> = ({ post }) => {
   return (
     <article>
       <Link href={post.url}>
@@ -34,4 +34,4 @@ const Card: React.FC<Props> = ({ post }) => {
   );
 };
 
-export default Card;
+export default Post;

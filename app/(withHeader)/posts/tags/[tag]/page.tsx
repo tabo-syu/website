@@ -1,4 +1,4 @@
-import CardList from '@/components/model/post/CardList';
+import PostList from '@/components/model/post/PostList';
 import { H2 } from '@/components/ui/Heading';
 import WideContainer from '@/components/ui/WideContainer';
 import { allTags, findPostsFromTag } from '@/lib/posts';
@@ -24,7 +24,7 @@ export default function Page({ params }: Props) {
   return (
     <WideContainer>
       <H2 id='latest'>{`${params.tag} 記事一覧`}</H2>
-      <CardList posts={posts} />
+      <PostList posts={posts} />
     </WideContainer>
   );
 }

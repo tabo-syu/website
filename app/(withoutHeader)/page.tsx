@@ -1,4 +1,4 @@
-import CardList from '@/components/model/post/CardList';
+import RecentPosts from '@/components/model/post/PostList';
 import Ranking from '@/components/model/spotify/Ranking';
 import { H2 } from '@/components/ui/Heading';
 import MainVisual from '@/components/ui/MainVisual';
@@ -18,8 +18,8 @@ export default async function Page() {
       <MainVisual />
       <WideContainer>
         <H2 id='posts'>Recent Posts</H2>
-        <CardList posts={posts} />
-        <H2 id='spotify'>My Spotify</H2>
+        <RecentPosts posts={posts} />
+        <H2 id='spotify'>My Spotify Trends</H2>
         <Ranking artists={artists} tracks={tracks} />
       </WideContainer>
     </>
