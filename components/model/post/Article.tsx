@@ -1,3 +1,4 @@
+import TagList from '@/components/model/post/TagList';
 import { H2, H3, H4, H5, H6 } from '@/components/ui/Heading';
 import Hr from '@/components/ui/Hr';
 import Img from '@/components/ui/Img';
@@ -7,7 +8,6 @@ import { A, Blockquote, P } from '@/components/ui/Text';
 import { Post } from 'contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import 'prismjs/themes/prism-okaidia.min.css';
-import TagList from './TagList';
 
 type Props = {
   post: Post;

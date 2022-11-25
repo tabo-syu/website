@@ -1,7 +1,7 @@
+import ArtistMedia from '@/components/model/spotify/Artist';
+import TrackMedia from '@/components/model/spotify/Track';
 import { H3 } from '@/components/ui/Heading';
 import { Artist, Track } from '@/lib/spotify';
-import ArtistMedia from './Artist';
-import TrackMedia from './Track';
 
 type Props = {
   artists: Artist[];

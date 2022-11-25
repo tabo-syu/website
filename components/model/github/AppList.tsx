@@ -1,5 +1,5 @@
+import App from '@/components/model/github/App';
 import { Repository } from '@/lib/github';
-import App from './App';
 
 type Props = {
   repos: Repository[];

@@ -1,7 +1,7 @@
+import TagList from '@/components/model/post/TagList';
 import { Post } from 'contentlayer/generated';
 import Image from 'next/image';
 import Link from 'next/link';
-import TagList from './TagList';
 
 type Props = {
   post: Post;
