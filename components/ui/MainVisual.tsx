@@ -14,7 +14,7 @@ const MainVisual: React.FC = () => {
           Curiosity Driven Development
         </p>
       </header>
-      <SlArrowDown className='absolute bottom-8 text-2xl md:bottom-10 md:text-3xl' />
+      <SlArrowDown className='absolute bottom-14 text-2xl md:bottom-10 md:text-3xl' />
     </section>
   );
 };
