@@ -15,7 +15,8 @@ export function generateStaticParams(): Props['params'][] {
 }
 
 export default function Page({ params }: Props) {
-  const posts = findPostsFromTag(params.tag);
+  const tag = decodeURIComponent(params.tag);
+  const posts = findPostsFromTag(tag);
 
   if (!posts) {
     notFound();
@@ -23,7 +24,7 @@ export default function Page({ params }: Props) {
 
   return (
     <WideContainer>
-      <H2 id='latest'>{`${params.tag} tag`}</H2>
+      <H2 id='latest'>{`${tag} tag`}</H2>
       <PostList posts={posts} />
     </WideContainer>
   );
