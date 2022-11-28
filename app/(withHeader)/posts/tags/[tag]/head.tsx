@@ -16,7 +16,7 @@ export default function Head({ params }: Props) {
 
   return (
     <TagHead
-      title={`${params.tag}タグ 記事一覧`}
+      title={`${params.tag} tag`}
       description={`今までに${params.tag}タグとして投稿した記事の一覧ページです。`}
       image='/ogp.jpg'
       type='blog'

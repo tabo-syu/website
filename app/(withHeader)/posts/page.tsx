@@ -6,7 +6,7 @@ import { latestPosts } from '@/lib/posts';
 export default function Page() {
   return (
     <WideContainer>
-      <H2 id='latest'>最新記事</H2>
+      <H2 id='latest'>All posts</H2>
       <PostList posts={latestPosts} />
     </WideContainer>
   );

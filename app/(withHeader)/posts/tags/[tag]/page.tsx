@@ -23,7 +23,7 @@ export default function Page({ params }: Props) {
 
   return (
     <WideContainer>
-      <H2 id='latest'>{`${params.tag} 記事一覧`}</H2>
+      <H2 id='latest'>{`${params.tag} tag`}</H2>
       <PostList posts={posts} />
     </WideContainer>
   );
