@@ -1,13 +1,14 @@
 import ArtistMedia from '@/components/model/spotify/Artist';
 import TrackMedia from '@/components/model/spotify/Track';
 import { H3 } from '@/components/ui/Heading';
-import { Artist, Track } from '@/lib/spotify';
+import { fetchTopArtists, fetchTopTracks } from '@/lib/spotify';
+import { use } from 'react';
 
-type Props = {
-  artists: Artist[];
-  tracks: Track[];
-};
-const Ranking: React.FC<Props> = ({ artists, tracks }) => {
+const Ranking: React.FC = () => {
+  const [artists, tracks] = use(
+    Promise.all([fetchTopArtists(), fetchTopTracks()])
+  );
+
   return (
     <div className='grid-rows grid gap-10 md:grid-cols-2'>
       <section>

@@ -5,17 +5,10 @@ import { H2 } from '@/components/ui/Heading';
 import MainVisual from '@/components/ui/MainVisual';
 import ViewMore from '@/components/ui/ViewMore';
 import WideContainer from '@/components/ui/WideContainer';
-import { fetchPinnedRepositories } from '@/lib/github';
 import { latestPosts } from '@/lib/posts';
-import { fetchTopArtists, fetchTopTracks } from '@/lib/spotify';
 
 export default async function Page() {
   const posts = latestPosts.slice(0, 3);
-  const repos = await fetchPinnedRepositories();
-  const [artists, tracks] = await Promise.all([
-    fetchTopArtists(),
-    fetchTopTracks(),
-  ]);
 
   return (
     <>
@@ -25,9 +18,9 @@ export default async function Page() {
         <RecentPosts posts={posts} />
         <ViewMore href='/posts' text='See all posts' />
         <H2 id='apps'>My Apps</H2>
-        <MyApps repos={repos} />
+        <MyApps />
         <H2 id='spotify'>My Spotify Trends</H2>
-        <MySpotifyTrends artists={artists} tracks={tracks} />
+        <MySpotifyTrends />
       </WideContainer>
     </>
   );
