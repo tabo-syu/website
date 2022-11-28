@@ -1,3 +1,4 @@
+import PublishDate from '@/components/model/post/PublishDate';
 import TagList from '@/components/model/post/TagList';
 import { H2, H3, H4, H5, H6 } from '@/components/ui/Heading';
 import Hr from '@/components/ui/Hr';
@@ -42,6 +43,7 @@ const Article: React.FC<Props> = ({ post }) => {
       <h1 className='mb-10 text-4xl font-bold'>{post.title}</h1>
       <div className='mb-6'>
         <TagList tags={post.tags} />
+        <PublishDate date={post.date} />
       </div>
       <MDXContent components={components} />
     </article>

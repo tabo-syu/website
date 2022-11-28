@@ -1,5 +1,6 @@
 import TagList from '@/components/model/post/TagList';
 import { Post } from 'contentlayer/generated';
+import { format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -23,7 +24,7 @@ const Post: React.FC<Props> = ({ post }) => {
           <h2 className='mb-2 text-xl'>{post.title}</h2>
           <div className='mb-4 text-sm text-gray-400 decoration-gray-400'>
             <time className='pr-1' dateTime={post.date}>
-              {post.date}
+              {`${format(new Date(post.date), 'yyyy/MM/dd')}`}
             </time>
             公開
           </div>
