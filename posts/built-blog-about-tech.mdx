@@ -1,0 +1,177 @@
+---
+title: ブログを作った（技術的なお話）
+description: このブログの技術的な側面について書いていきます。
+tags:
+  - '技術'
+image: /ogp.jpg
+date: '2022-12-08'
+---
+
+import Footer from '../components/ui/Footer';
+
+無事 2 回目の更新に成功しました。有言実行です。一つの記事しか公開しなかった昔のブログに比べれば大した進歩です。とりあえず自分を褒めておこうと思います。
+
+さて今回は、前回の記事の最後に予告した通り、このブログの技術的な側面について書いていきます。
+
+## つくった機能と実現した技術
+
+もちろんブログがメインではあるのですが、おまけとして作ったものもあるので、それらを含めて紹介していきます。
+
+### サイトそのもの
+
+このサイトそのものは [Next.js](https://nextjs.org) で構築しました。選定理由としては、最近 Next.js 13 のリリースがあり、試験的な機能を含めて多くの変更が入り、それらをキャッチアップするためです。  
+...というのが体裁で、実際は、Next.js 13 を使った何かをつくりたかったからブログをつくりはじめました。実は、因果関係が逆です。
+
+今は、状態を持たないサイトなので、実装が複雑になるような場面には一切あたりませんでしたが、新しい Layouts や next/font の使い方、`generateStaticParams` を使った SSG の方法、React の React Server Components の基礎学習ができたので、当初の目的は達成できました。
+
+### 入稿機能
+
+入稿する方法は、リポジトリ内に Markdown を配置して SSG する方法を考えていました。（してくれる人がいるかは別に、）GitHub で修正の提案を受けられたり、Markdown は他サービスに移行もしやすかったりするためです。
+
+調べてみると、まず最初に行き当たったのが [@next/mdx](https://nextjs.org/docs/advanced-features/using-mdx#nextmdx) です。
+
+#### @next/mdx
+
+@next/mdx は Next.js で MDX を簡単に扱うことができるようになる公式のプラグインです。
+
+MDX とは、Markdown に JSX を直接記述できる Markdown のスーパーセットで、コンテンツにコンポーネントを埋め込めるようになります。例えば、自作の棒グラフコンポーネントを作り、React のような感覚でコンポーネントを使ってあげれば、グラフを表示できるようになります。スーパーセットなので、コンポーネントが必要ない記事は Markdown と全くかわらない構文で書けるのも良い点です。
+
+しかし、@next/mdx を使ってみると自分が期待していたものとは異なることがわかりました。そもそも、Next.js 13 の app directory ではまだ利用できませんでしたし、ページの記事部分のみを MDX として埋め込む形を期待していたのですが、 Next.js のページコンポーネントの代わりに MDX を利用するため、レイアウトを使うには、記事には直接関係のないレイアウトコンポーネントを使う必要がありました。
+
+```jsx
+import { MyComponent, MyLayoutComponent } from 'my-components';
+
+export const meta = {
+  author: 'Rich Haines',
+};
+
+// 記事本文
+# My MDX Page with a Layout
+
+This is a list in markdown:
+
+- One
+- Two
+- Three
+
+Checkout my React component:
+
+<MyComponent />
+// 記事本文おわり
+
+// 記事を囲むレイアウトを使うためにはすべての MDX でコンポーネントを使ってあげなければならない。
+export default ({ children }) => <MyLayoutComponent meta={meta}>{children}</MyLayoutComponent>
+```
+
+これだと他サービスに移行する際にすべての MDX を Markdown に書き換える作業が必要になります。
+このことから、@next/mdx の利用は断念しました。
+
+#### next-mdx-remote
+
+次に行き着いたのが、[next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) です。next-mdx-remote は、様々な場所（ファイルシステム、DB、CMS など）から読み取れる MDX 文字列を渡せば、いい感じに JSX コンポーネントとして解釈してくれるライブラリです。（曖昧ですみません。）そのため、さきほど解決できなかったページの記事部分のみを Markdown(MDX) として埋め込む形を実現することが可能です。
+
+実際にこのライブラリを使って実装を進めていたのですが、いくつか問題点が出てきました。それは、MDX の執筆時にホットリロードが適用されない点と、開発時にはページ遷移の度に毎回全記事ファイルを読みにいくため、パフォーマンスに優れない点です。
+
+どちらの問題も解決策はあったのですが、前者は、独自で作ったファイルの変更に Next.js がリロードをかけてくれるわけもなく解決するには追加の外部ライブラリが必要になる、後者は、キャッシュを新たに実装すれば解決可能でしたが、デプロイ時は SSG するのでパフォーマンスには影響せず、開発時のみのために実装する必要がありました。
+
+どちらもそれなりの労力を用し、このままだと完成しないおそれもあったので別の手段を探すことにしました。
+
+#### Contentlayer
+
+[Contentlayer](https://www.contentlayer.dev) はさきほどのホットリロード問題とファイル読み込み問題を同時に解決するライブラリです。Next.js 13 にも対応しており、app directory でも利用可能です。さらに公式サイトの [Getting Started](https://www.contentlayer.dev/docs/getting-started) に従って進めていけば簡単に導入できました。
+
+ほとんど何の問題もなく入稿機能を実現できたのでとても満足しています。
+
+### GitHub のピン止めリポジトリの表示
+
+[トップページの My Apps](/#apps) には GitHub のピン止めリポジトリを表示しています。ソフトウェアエンジニアの端くれとして、成果物を掲載していたほうが、箔がつきそうという浅い考えです。
+
+GitHub の情報を取得するには GitHub が提供している API を利用します。現在、API は 2 種類あり、[REST API](https://docs.github.com/ja/rest) と [GraphQL API](https://docs.github.com/ja/graphql) があります。いつも REST API を使っていたので、今回もそちらを使って実装しようと考えていたのですが、ピン止めリポジトリの取得は GraphQL でしか提供されていないことがわかりました。そのため、今回は GraphQL で実装しています。
+
+下記にピン止めリポジトリを取得するためのコード例を置いておきます。
+
+```typescript
+const fetchPinnedRepositories = async () => {
+  // GitHub で発行したアクセストークン
+  const accessToken = 'xxx';
+  // GitHub のユーザー名
+  const username = 'tabo-syu';
+
+  const query = {
+    query: `{
+      user(login: "${username}") {
+        pinnedItems(first: 6, types: REPOSITORY) {
+          nodes {
+            ... on Repository {
+              name
+              description
+              url
+              languages(first: 1, orderBy: {field: SIZE, direction: DESC}) {
+                edges {
+                  node {
+                    name
+                    color
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }`,
+  };
+  const response = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: {
+      Authorization: `bearer ${accessToken}`,
+    },
+    body: JSON.stringify(query),
+  });
+
+  console.log(JSON.stringify(await response.json()));
+};
+```
+
+### Spotify の自アカウントのトレンド表示
+
+[トップページの My Spotify Trends](/#spotify) は Spotify の自アカウントのトレンド情報を掲載しています。ブログの訪問者にどんな人間か理解してもらうにはうってつけの表現だと考えたからです。
+
+Spotify API で自アカウントに紐づく情報を取得するには、 OAuth2.0 で認可を行ってから API に問い合わせる必要があります。詳しい説明は省きますが、[web-api-auth-examples](https://github.com/spotify/web-api-auth-examples/blob/master/authorization_code/app.js) をローカルで実行することで得たリフレッシュトークンを Next.js の環境変数として保存します。それをアクセストークンに引き換えて Spotify API に引き換えたトークンを付与して問い合わせることで自アカウントのトレンド情報を取得しています。
+
+詳しくは[リポジトリ](https://github.com/tabo-syu/website/blob/main/lib/spotify.ts)と [Spotify のドキュメント](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/)を参考にしてください。（あきらめ）
+
+## 今後実装したい機能
+
+おおよそブログとして最低限の機能は用意したのですが、今後実装予定の機能について考えていることを書いていきます。
+
+### 前後記事へのリンクをつける
+
+今回の記事がそうでしたが、前編の記事から後編の記事へ遷移する場合に、記事一覧に遷移してから後編ページへ遷移する必要があるので、続きを読みたい時、読み手は記事を探しに行く作業をしなければなりません。それを記事の下部へ前後記事へのリンクをつけることで解消します。
+
+Contentlayer から取得できる公開順の全記事から自身の記事をファイル名から位置を特定し、その前後にある記事を取得すれば良いため、すぐに実装もできそうです。
+
+### 目次機能をつける
+
+ブログ系のサービスやサイトではよく見ますが、記事の見出しを一覧として表示する機能です。
+
+目次があると読み手が、この記事には何が書かれているのか、どのような展開でタイトルを回収していくのか、目的の情報はどこで手に入りそうなのか等、さまざな情報が読み取れます。自分もかなり活用していて、個人的に記事があるサイトにはあったほうが良い機能だと考えています。
+
+Contentlayer から mdx の文字列データを取得できるため、パーサーを自作するか、[markdown-toc](https://github.com/jonschlinkert/markdown-toc) を利用して生成することで実現できるのではないかと考えています。実際にとる手法や使うライブラリについては実装する時に考えます。
+
+### 自作コマンドラインアプリケーションが動作するページを作る
+
+ここ数年で、WebAssembly という単語をよく聞くようになりました。詳しいことはよくわかりませんが、WebAssembly は [MDN](https://developer.mozilla.org/ja/docs/WebAssembly/Concepts#:~:text=%E3%82%A6%E3%82%A7%E3%83%96%E4%B8%8A%E3%81%A7%E5%8B%95%E4%BD%9C%E3%81%99%E3%82%8B%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%82%A2%E3%83%97%E3%83%AA%E3%81%A7%E5%BE%93%E6%9D%A5%E3%81%AF%E5%AE%9F%E7%8F%BE%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%8B%E3%81%A3%E3%81%9F%E3%80%81%E3%83%8D%E3%82%A4%E3%83%86%E3%82%A3%E3%83%96%E6%B0%B4%E6%BA%96%E3%81%AE%E9%80%9F%E5%BA%A6%E3%81%A7%E8%A4%87%E6%95%B0%E3%81%AE%E8%A8%80%E8%AA%9E%E3%81%A7%E8%A8%98%E8%BF%B0%E3%81%95%E3%82%8C%E3%81%9F%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E3%82%A6%E3%82%A7%E3%83%96%E4%B8%8A%E3%81%A7%E5%8B%95%E4%BD%9C%E3%81%95%E3%81%9B%E3%82%8B%E6%96%B9%E6%B3%95%E3%82%92%E6%8F%90%E4%BE%9B%E3%81%97%E3%81%BE%E3%81%99%E3%80%82) によると、
+
+> ウェブ上で動作するクライアントアプリで従来は実現できなかった、ネイティブ水準の速度で複数の言語で記述されたコードをウェブ上で動作させる方法を提供します。
+
+とあります。
+
+興味と目的なく学ぶことができない人間なので、触る目的を探していたところ思いついたのが、Go でつくった簡単な[自作のコマンドラインアプリケーション](https://github.com/tabo-syu/pig)のロジック部分を Web に乗せてみるです。さきほどの説明にある「複数の言語」に Go も含まれており、Go のコンパイラも WebAssembly としてコンパイル可能です。少し調べた限りでもそれらしい記事がヒットするので、実現可能性はありそうです。
+
+そもそも WebAssembly とは何なのか、どのようにしてコンパイルするのか、JS 側からどのように呼び出すのか等調べることはたくさんありそうですが、興味はとてもあるので、楽しみにしているものの一つです。
+
+## おわりに
+
+今回は、このブログをつくるに当たって利用した技術やこれから実装したい機能について書きました。特に根幹の入稿機能については紆余曲折あったので、完成までもっていけたことに安心しています。
+
+次回は、最近興味を持って調べてる宇宙関連の知識について雑に書いていこうと思います。（内容の毛色がだいぶ異なりますが、著者は正気です。）

@@ -16,8 +16,8 @@ const Img: React.FC<Props> = (props) => {
     <Image
       src={props.src ?? 'dummy.png'}
       alt={props.alt ?? ''}
-      width={width ?? 0}
-      height={height ?? 0}
+      width={width ?? undefined}
+      height={height ?? undefined}
     />
   );
 };

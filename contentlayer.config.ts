@@ -51,6 +51,7 @@ export default makeSource({
   documentTypes: [Post],
   mdx: {
     remarkPlugins: [remarkGfm, remarkPrism],
+    // TODO: 型がうまく合わない
     rehypePlugins: [[rehypeImgSize as any, { dir: 'public' }]],
   },
 });
