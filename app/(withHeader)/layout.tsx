@@ -7,10 +7,10 @@ type Props = {
 export default function Layout({ children }: Props) {
   return (
     <>
-      <div className='sticky top-0'>
+      <div className='fixed w-full'>
         <Header />
       </div>
-      <main>{children}</main>
+      <main className='pt-[65px] md:pt-[81px]'>{children}</main>
       <div>
         <Footer />
       </div>

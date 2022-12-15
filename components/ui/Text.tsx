@@ -33,4 +33,12 @@ const Code: React.FC<Props> = ({ children }) => {
   );
 };
 
-export { P, A, Blockquote, Code };
+const Pre: React.FC<Props> = ({ children }) => {
+  return (
+    <pre className='overflow-x-auto rounded p-3 text-sm dark:bg-gray-800'>
+      {children}
+    </pre>
+  );
+};
+
+export { P, A, Blockquote, Code, Pre };
