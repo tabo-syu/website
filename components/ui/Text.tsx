@@ -35,7 +35,7 @@ const Code: React.FC<Props> = ({ children }) => {
 
 const Pre: React.FC<Props> = ({ children }) => {
   return (
-    <pre className='overflow-x-auto rounded p-3 text-sm dark:bg-gray-800'>
+    <pre className='overflow-x-auto rounded bg-gray-800 p-3 text-sm'>
       {children}
     </pre>
   );
