@@ -15,10 +15,17 @@ export function generateStaticParams(): Props['params'][] {
 
 export default function Page({ params }: Props) {
   const post = allPosts.find((post) => post.slug === params.slug);
-
   if (!post) {
     notFound();
   }
+
+  const headings = Array.from(
+    post.body.raw.matchAll(/^(#{2,6})(.*)$/gm),
+    (heading) => ({
+      level: heading[1].split('').length,
+      text: heading[2].trim(),
+    })
+  );
 
   return (
     <div className='mx-auto flex max-w-6xl justify-around gap-x-8 px-2 md:px-4'>
@@ -27,9 +34,13 @@ export default function Page({ params }: Props) {
           <Article post={post} />
         </div>
       </div>
-      <div className='hidden max-w-xs shrink-0 lg:block'>
-        <Toc post={post} />
-      </div>
+      {headings.length ? (
+        <div className='hidden max-w-xs shrink-0 lg:block'>
+          <Toc headings={headings} />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

@@ -1,10 +1,8 @@
-import { Post } from 'contentlayer/generated';
-
-type HeadingProps = {
+type Heading = {
   level: number;
   text: string;
 };
-const Heading: React.FC<HeadingProps> = ({ level, text }) => {
+const Heading: React.FC<Heading> = ({ level, text }) => {
   let padding = `pl-0`;
   switch (level) {
     case 3:
@@ -34,17 +32,9 @@ const Heading: React.FC<HeadingProps> = ({ level, text }) => {
 };
 
 type Props = {
-  post: Post;
+  headings: Heading[];
 };
-const Toc: React.FC<Props> = ({ post }) => {
-  const headings = Array.from(
-    post.body.raw.matchAll(/^(#{2,6})(.*)$/gm),
-    (heading) => ({
-      level: heading[1].split('').length,
-      text: heading[2].trim(),
-    })
-  );
-
+const Toc: React.FC<Props> = ({ headings }) => {
   return (
     <nav className='sticky top-[65px] pt-10 md:top-[81px]'>
       <div className='rounded bg-white py-6 px-5 dark:bg-gray-900 '>
