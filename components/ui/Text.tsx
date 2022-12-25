@@ -3,7 +3,7 @@ type Props = {
 };
 
 const P: React.FC<Props> = (props) => {
-  return <p className='mb-8 leading-loose' {...props} />;
+  return <p className='mb-8 leading-loose last:mb-0' {...props} />;
 };
 
 const A: React.FC<Props> = (props) => {
